@@ -148,10 +148,9 @@ func (l *Logger) Write(p []byte) (n int, err error) {
 			return 0, err
 		}
 	}
-        fmt.Printf("Testing Jay")
-	fileInfo, err_2 := os.Stat(l.Filename)
-        if err_2 != nil {
-		return 0, err_2
+	fileInfo, err := os.Stat(l.Filename)
+        if err != nil {
+		return 0, err
 	}
 
 	if fileInfo.Size() > l.max() {
