@@ -148,8 +148,12 @@ func (l *Logger) Write(p []byte) (n int, err error) {
 			return 0, err
 		}
 	}
+	fileInfo, err := os.Stat(l.Filename)
+        if err != nil {
+		return 0, err
+	}
 
-	if l.size+writeLen > l.max() {
+	if fileInfo.Size() > l.max() {
 		if err := l.rotate(); err != nil {
 			return 0, err
 		}
